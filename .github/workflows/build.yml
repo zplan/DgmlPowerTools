@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+
+env: 
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  RepositoryUrl: 'https://github.com/${{ github.repository }}'
+  RepositoryBranch: '${{ github.ref }}'
+  SourceRevisionId: '${{ github.sha }}'
+  Configuration: Release
+  SolutionPath: DgmlPowerTools.2022\DgmlPowerTools.2022.sln
+
+jobs:
+  build-extension:
+    runs-on: windows-latest
+    env: 
+        VsixManifestPath: DgmlPowerTools.2022\DgmlPowerTools.2022\source.extension.vsixmanifest
+        VsTargetVersion: 'VS2022'
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2 
+    - name: Setup .NET Core 5
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0' 
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Restore NuGet Packages
+      run: nuget restore $env:SolutionPath
+    - name: Build extension
+      run: msbuild $env:SolutionPath /t:Rebuild
+      env: 
+        DeployExtension: False
