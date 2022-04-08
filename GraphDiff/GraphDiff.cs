@@ -1,13 +1,9 @@
 ﻿using Microsoft.VisualStudio.GraphModel;
 using Microsoft.VisualStudio.GraphModel.GraphDiff;
-using Microsoft.VisualStudio.GraphModel.Schemas;
 using Microsoft.VisualStudio.Progression;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LovettSoftware.DgmlPowerTools
 {

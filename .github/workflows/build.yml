@@ -33,3 +33,8 @@ jobs:
       run: msbuild $env:SolutionPath /t:Rebuild
       env: 
         DeployExtension: False
+    - name: Upload VSIX artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: VSIX-DgmlPowerTools.2022
+        path: 'DgmlPowerTools.2022\DgmlPowerTools.2022\bin\Release\DgmlPowerTools.2022.vsix'
